@@ -1,0 +1,222 @@
+.active{
+  border-bottom: 1px solid white;
+  margin-bottom: 4px;
+}
+.Homecontainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin: 0px 0px 0px -8px ;
+  padding: 0px 0px 0px 14px ;
+  background-color: black;}
+
+.parentcontact{
+  display: flex;
+  height: auto;
+  width: 100%;
+  margin: 0px 0px 0px -8px;
+  background-color:black;
+  padding: 0px 14px 100px 0px;
+  flex-direction: row;}
+
+.contactimg{
+  background: url(./asserts/contactimg.svg);
+  background-size: 450px;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center; 
+  width: 40%;
+  background-color: white;
+  margin: 70px 30px 0px 30px;
+  border-radius: 4px;
+  height: 550px;
+}
+.contact{
+  font-family: 'Montserrat', sans-serif;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.177);
+  padding: 0px 70px 0px 0px;
+  margin: 70px 10px 0px 0px ;
+  border-radius: 7px;
+  overflow: hidden;
+  height: 550px;
+  animation: contactbg 5s infinite alternate-reverse;
+  background-size: 400% 400%;}
+
+.contactinput{ border: 1px solid black;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  flex-wrap: wrap;
+  height: 250px;
+  padding-top: 50px;
+  margin: 0px 0px 0px 0px; }
+.contactabout{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  width: 94%;
+  color: white;
+  height: 200px;
+  margin: 0px 0px 0px 0px; }
+.contactabout h1{
+  font-size: 25px;
+  margin: 0px 0px 0px 40px;}
+.contactabout textarea{
+  border: 1px solid rgba(128, 128, 128, 0.573);
+  width: 100%;
+  outline: none;
+  border-radius: 4px;
+  font-size: 20px;
+  padding: 5px 10px 10px 10px ;
+  resize: none;
+  height: 150px;
+  margin: 5px 0px 0px 40px;}
+.contactbtn{
+  width: 100%;
+  height: 80px;
+  margin: 0px 0px 0px 10px; }
+.contactbtn Button{
+  float: right;
+  margin: 25px 0px 0px 0px;
+  height: 60px;
+  font-size: 30px;
+  font-weight: bolder;
+  width: 200px;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  border: none;
+  background-color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+}
+@media only screen and (max-width: 768px) {
+  .parentcontact{
+    display: flex;
+    margin-top:-40px ;
+    overflow: hidden;
+    flex-direction: column;}
+  .contactimg{ 
+    width: 90%;
+    background-color: white;
+    margin: 70px 30px 0px 30px;
+    border-radius: 4px;
+    background-size: 200px;
+    height: 250px;
+  }
+  .contact{
+    padding: 20px 0px 20px 0px;
+    margin: 70px 0px 0px 0px ;
+    height: auto;
+    width: 100%;}
+  .contactabout{
+    width: 80%;
+    margin: 0px 0px 0px -10px;  }
+  .contactabout h1{font-size: 15px;}
+  .contactabout textarea{
+    font-size: 15px;}
+  .contactbtn{
+    width: 90%;
+    height: 80px;
+    margin: 0px 0px 0px 10px; }
+  .contactbtn Button{
+    float: right;
+    margin: 25px 0px 0px 0px;
+    height: 60px;
+    font-size: 30px;
+    font-weight: bolder;
+    width: 200px;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    border: none;
+    background-color: #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+  }}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
