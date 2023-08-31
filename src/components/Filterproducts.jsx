@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Useproductcontext } from '../context/Productcontext';
 import styled from 'styled-components';
-import Filtercontext from "../context/Sortcontext";
+import {useFiltercontext} from "../context/Sortcontext";
 
 
 const Filterproducts = () => {
@@ -9,9 +9,8 @@ const Filterproducts = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [change, setChange] = useState('Filter');
 
-  // const {dispatch}=Filtercontext();
+  const {Sortfun}=useFiltercontext();
 
-  
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -19,7 +18,7 @@ const Filterproducts = () => {
 
   const handleDropdownItemClick = (option) => {
     setChange(option);
-    // console.log(dispatch);
+    Sortfun(option);
     setIsOpen(false);
   };
 
@@ -34,7 +33,7 @@ const Filterproducts = () => {
           <DropdownContent open={isOpen}>
             <DropdownItem onClick={() => handleDropdownItemClick('Low to High')}>Low to High</DropdownItem>
             <DropdownItem onClick={() => handleDropdownItemClick('High to low')}>High to low</DropdownItem>
-            <DropdownItem onClick={() => handleDropdownItemClick('New items')}>New items</DropdownItem>
+            <DropdownItem onClick={() => handleDropdownItemClick('A-Z')}>A-Z</DropdownItem>
           </DropdownContent>
         </DropdownContainer>
       </Dropdown>

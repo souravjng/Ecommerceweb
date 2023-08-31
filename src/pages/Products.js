@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import {Useproductcontext} from '../context/Productcontext';
+import {useFiltercontext} from '../context/Sortcontext';
 import Product from '../components/Product';
 import Filterproducts from '../components/Filterproducts';
 import Loader from '../components/Loader';
-
+ 
 const Products = () => {
     
-const {Loading,products}=Useproductcontext();
-
-
+const {Loading,Sortproducts}=useFiltercontext();
 
 return(<>
 <Div1>
@@ -21,7 +19,7 @@ return(<>
 <Div1right>
 <Div1righttop><Filterproducts/></Div1righttop>
 <div className='Productsdiv'>
-{products.map((curr)=>{return <Product key={curr.id} {...curr}/>;})}
+{Sortproducts.map((curr)=>{return <Product key={curr.id} {...curr}/>;})}
 </div>
 </Div1right>
 
