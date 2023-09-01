@@ -1,8 +1,9 @@
 const SortReducer = (state, action) => {
-
+  
   if (action.type === 'ADD_ALL_PRODUCTS') {
     return {
       ...state,
+      Allproducts: [...action.payload],
       Sortproducts: [...action.payload],
       Loading: false,
     };}
@@ -22,14 +23,43 @@ const SortReducer = (state, action) => {
     };} 
 
   else if (action.type === 'A-Z') {
-    
+      
     const sortdata = [...state.Sortproducts].sort((a, b) => a.name.localeCompare(b.name));
     return {
       ...state,
       Sortproducts:sortdata,
     };}
+    
+  else if (action.payload === 'category') {
+      const sortdata = [...state.Allproducts].filter((curr)=>{return curr.category.toLowerCase().includes(action.type);})
+    return {
+      ...state,
+      Sortproducts:sortdata,
+    };}
+  else if (action.payload && action.type === 'All') {
 
-  else {return state;}
+  return {
+    ...state,
+    Sortproducts:[...state.Allproducts],
+  };}
+  
+
+
+  
+  else {
+
+    const sortdata = [...state.Allproducts].filter((curr)=>{return curr.name.toLowerCase().includes(action.type);})
+    return {...state,
+    Sortproducts:sortdata,};
+
+    
+    
+    
+    
+    
+    
+    
+    }
 };
 
 export default SortReducer;

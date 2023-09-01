@@ -25,7 +25,7 @@ const Footerdiv =styled.div`
   flex-direction: column;
   height: 8rem;
   background: black;
-  z-index:1;
+  z-index:-1;
   margin:0px 0px 0px -8px ;
   padding:10px 14px 0px 0px;
   position:relative;

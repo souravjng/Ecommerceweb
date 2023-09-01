@@ -5,10 +5,9 @@ import {useFiltercontext} from "../context/Sortcontext";
 
 
 const Filterproducts = () => {
-  const { products } = Useproductcontext();
+  const { Sortproducts } = useFiltercontext();
   const [isOpen, setIsOpen] = useState(false);
   const [change, setChange] = useState('Filter');
-
   const {Sortfun}=useFiltercontext();
 
 
@@ -25,7 +24,7 @@ const Filterproducts = () => {
   return (
     <>
       <Headline>
-        <h1>{`${products.length} Products Available`}</h1>
+        <h1>{`${Sortproducts.length} Products Available`}</h1>
       </Headline>
       <Dropdown>
         <DropdownContainer>

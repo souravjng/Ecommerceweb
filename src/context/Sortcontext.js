@@ -8,6 +8,7 @@ import SortReducer from "../reducer/SortReducer";
 const Filtercontext=createContext();                           //create
 
 const initialstate={
+    Allproducts:[],
     Sortproducts:[],
     Loading:true,
 };
@@ -19,12 +20,16 @@ const [state,dispatch]=useReducer(SortReducer,initialstate);
 
 const Sortfun=(obj)=>{
   dispatch({type:obj});
+  
 }
+const Filtersearch=(obj1,obj2)=>{
+  dispatch({type:obj1,payload:obj2});}
+
 
 useEffect(()=>{dispatch({type:'ADD_ALL_PRODUCTS',payload:products});},[products]);
 
   return (
-    <Filtercontext.Provider value={{...state,Sortfun}}>           
+    <Filtercontext.Provider value={{...state,Sortfun,Filtersearch}}>           
     {children}
     </Filtercontext.Provider>
   );

@@ -7,6 +7,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import styled from "styled-components";
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useFiltercontext } from '../context/Sortcontext';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 
 let navbarbackground='black';
@@ -18,21 +22,33 @@ let btnhovercolor='black';
 
 
 const Navbar = () =>{
+
+const {Filtersearch}=useFiltercontext();
+const navigate = useNavigate();
+
+
+
+
+
 const icon= <ShoppingCartIcon fontSize='large'/>
 const [real,update]=useState("");
 const [real2,update2]=useState("");
 const submit = (obj) =>{ 
   obj.preventDefault();
   update2(real);
-  update("");}
+  update("");
+  navigate('./Products');}
+
+
+useEffect(()=>{Filtersearch(real2,"name"); },[real2]);
+  
+
 const shownavbar=()=>{
   document.getElementById("hamburger").style.display="none";
   document.getElementById("Clearnavbar").style.display="inline";
   document.getElementById("Nav").style.display="inline";
   document.getElementById("searchbar").style.display="none";
-  document.getElementById("logo").style.display="none";
-}
-
+  document.getElementById("logo").style.display="none";}
 const hidenavbar=()=>{
   if(window.screen.width<786){
   document.getElementById("hamburger").style.display="inline";
@@ -40,10 +56,9 @@ const hidenavbar=()=>{
   document.getElementById("searchbar").style.display="inline";
   document.getElementById("logo").style.display="inline";
   document.getElementById("Nav").style.display="none";
-  }
-  
+  }}
 
-}
+
 
 
 return (<>
@@ -54,7 +69,6 @@ return (<>
 <Navbarsearchinput className='navsearchinput'   type='text' placeholder="Search your product here" onChange={(obj)=>update(obj.target.value)}  value={real} ></Navbarsearchinput>
 <Navbarsearchicon className='navsearchbtn'  type='submit'><SearchIcon fontSize='large'/></Navbarsearchicon>
 </Form>
-<h1>{real2}</h1>
 </Navbarsearch>
 <Hamburger id='hamburger' onClick={shownavbar}><MenuIcon sx={{ fontSize: 55 }} fontSize="large"/></Hamburger>
 <Navbarmenu id='Nav'>
@@ -117,7 +131,7 @@ const Form = styled.form`
   }`;
 
 const Navbarsearchinput = styled.input`
-  width: 100%;
+  width: 88%;
   height: 2.85rem;
   font-size: 16px;
   text-decoration: none;
