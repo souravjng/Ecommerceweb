@@ -4,17 +4,26 @@ import {useFiltercontext} from '../context/Sortcontext';
 import Product from '../components/Product';
 import Filterproducts from '../components/Filterproducts';
 import Loader from '../components/Loader';
+import Priceformat from '../smallfuction/Priceformat';
+import { Button } from '@mui/material';
  
 const Products = () => {
 const [activecategory,setactivecategory]=useState();
+const [rangeprice,setrangeprice]=useState(null);
 const {Loading,Allproducts,Sortproducts}=useFiltercontext();
 const {Filtersearch}=useFiltercontext();
 const uniquecategory=[...new Set(Allproducts.map((curr)=>curr.category))];
+const maximumprice=Math.max(...Allproducts.map((curr)=>curr.price));
 const actvcategory=(obj,obj2)=>{
   setactivecategory(obj);
-  Filtersearch(obj,obj2);
-
-}
+  setrangeprice(obj2);
+  Filtersearch(obj,obj2);}
+const filterprice=(obj)=>{
+  setrangeprice(obj);
+  setTimeout(() => {
+    
+  Filtersearch(obj,'pricefilter');;
+  },1000);}
 
 return(<>
 <Div1>
@@ -22,8 +31,14 @@ return(<>
 <Div1left>
 <div>
    <h1 className='box'>Category</h1>
-   <p style={{color: activecategory === "All" ? 'red' : 'black'}} onClick={()=>actvcategory('All','All')} className='categoryh1' >All</p>
-  {uniquecategory.map((curr,index)=>{return <h1 className='categoryh1' key={index} onClick={()=>actvcategory(curr,"category")} style={{color: activecategory === curr ? 'red' : 'black'}} >{curr}</h1>;})}
+   <p style={{color: activecategory === "All" ? 'red' : 'black'}} onClick={()=>actvcategory('All','All')} className='boxh1' >All</p>
+  {uniquecategory.map((curr,index)=>{return <h1 className='boxh1' key={index} onClick={()=>actvcategory(curr,"category")} style={{color: activecategory === curr ? 'red' : 'black'}} >{curr}</h1>;})}
+  <div>
+  <h1 className='box'>Price</h1>
+  <p style={{fontSize:'18px'}} className='boxh1'>{<Priceformat price={rangeprice}/>}</p>
+  <input className='boxinput'  type='range' min={0} max={maximumprice} step={60} onChange={(event)=>filterprice(event.target.value)}  />
+  </div>
+  <Button onClick={()=>actvcategory("All","Max")}>Clear Filters</Button>
 </div>
 </Div1left>
 
@@ -68,21 +83,30 @@ const Div1left =styled.div`
   padding: 10px 5px 0px 5px;
   border:1px solid black;
  }
- .categoryh1{
+ .boxh1{
   font-weight:bold;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   margin:15px 0px 0px 0px;
   font-size:26px;
   text-align:center;
- }
- h1{cursor:pointer;}
 @media only screen and (max-width: 768px) {
-  .box{
     width:100px;
     font-size:15px;
-    height: 30px;}
-    .categoryh1{font-size:12px;}
+    height: 30px;
+}}
+.boxinput{
+  width:220px;
+  @media only screen and (max-width: 768px) {
+    width:100px;
+  }}
+ h1{cursor:pointer;}
+@media only screen and (max-width: 768px) {
+.box{
+  width:100px;
+  font-size:15px;
+  height: 30px;}
+.categoryh1{font-size:12px;}
  };`;
 
 const Div1right =styled.div`

@@ -11,6 +11,7 @@ const initialstate={
     Allproducts:[],
     Sortproducts:[],
     Loading:true,
+    filtersort:[],
 };
 
 const Filtercontextprovider = ({children}) => {                   //provide

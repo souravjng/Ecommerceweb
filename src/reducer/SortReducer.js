@@ -34,32 +34,33 @@ const SortReducer = (state, action) => {
       const sortdata = [...state.Allproducts].filter((curr)=>{return curr.category.toLowerCase().includes(action.type);})
     return {
       ...state,
+      filtersort:sortdata,
       Sortproducts:sortdata,
     };}
   else if (action.payload && action.type === 'All') {
-
   return {
     ...state,
     Sortproducts:[...state.Allproducts],
   };}
-  
-
-
-  
+  else if (action.payload === 'pricefilter') {
+       if([...state.filtersort].length===0){
+        [...state.filtersort]=[...state.Allproducts];
+       }
+       const sortdata=[...state.filtersort].filter((curr)=>{return curr.price<=action.type});
+    return {
+      ...state,
+      Sortproducts:[...sortdata],
+    };}
+    
   else {
-
-    const sortdata = [...state.Allproducts].filter((curr)=>{return curr.name.toLowerCase().includes(action.type);})
+    const filterby=action.type.toLowerCase();
+    const sortdata = [...state.Allproducts].filter(curr => curr.name.toLowerCase().includes(filterby) || curr.category.toLowerCase().includes(filterby));
     return {...state,
-    Sortproducts:sortdata,};
+    Sortproducts:sortdata,}}
+
+
 
     
-    
-    
-    
-    
-    
-    
-    }
 };
 
 export default SortReducer;
