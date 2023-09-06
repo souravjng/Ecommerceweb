@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Useproductcontext } from '../context/Productcontext';
 import styled from 'styled-components';
 import {useFiltercontext} from "../context/Sortcontext";
 

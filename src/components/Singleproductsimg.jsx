@@ -7,7 +7,6 @@ import Demodata from "./Links";
 const Singleproductsimg = ({apiimgdata=[{url:""}]}) => {
 const [realimg,updataimg]=useState(0);  
 const {id}=useParams();
-console.log(id);
 if(id==='-1'){apiimgdata=Demodata;}  
 return(<>
 <Single_product_left_imgs_div>

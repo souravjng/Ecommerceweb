@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
+import { Useproductcontext } from '../context/Productcontext';
+
 
 const Button = (props) =>{
 
-let cart_item,size;
+  const {Cartdata}= Useproductcontext();
+  let cart_item='';
+  
+let size;
 
-if(props.name==='cart'){ cart_item=0;size='17px';}
+if(props.name==='cart'){ cart_item=Cartdata.length;size='17px';}
 const Carttotal=styled.span`
 position:absolute;
 color:black;
@@ -14,7 +19,7 @@ width:${size};
 height:${size};
 font-size:15px;
 background-color:white;
-border-radius:33px;`;
+border-radius:33px;else{}`;
 
 return (<>
 <Btn> <Carttotal >{cart_item}</Carttotal> {props.text}</Btn>
@@ -37,6 +42,7 @@ const Btn =styled.button`
    align-items:center;
    height:3.5rem;
    padding-top:1rem;
+   border-radius: 0px;
    flex-direction:column;
    width:100%;
    text-align:center;}

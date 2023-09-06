@@ -6,16 +6,30 @@ const AppContext=createContext();                                  //CREATE
 
 const API="https://api.pujakaitem.com/api/products";
 
-const intialstate={                                                         //TEMPRARY STORAGE   
+const initialstate={                                                         //TEMPRARY STORAGE   
   Loading: false,
   Error: false,
   products:[],
   featureproducts:[],
   singleLoading:false,
-  singleproduct:{},};
+  singleproduct:{},
+  Cartdata:[],
+  Totalprice:[],};
 
 const AppProvider=({children})=>{                                        
-const [state,dispatch]=useReducer( productsreducer,intialstate);        //USEREDUCER HOOK
+const [state,dispatch]=useReducer( productsreducer,initialstate);        //USEREDUCER HOOK
+
+
+// useEffect(()=>{
+//   try{
+//   const localStoragedata=JSON.parse(localStorage.getItem("reactappdata"));
+//   if(localStoragedata){   //for local storage
+// dispatch({type:"ADD_TO_CART_FROM_LOCAL",payload:localStoragedata});}}
+// catch(err){console.log('From productcontext : '+err);}
+
+// },[]);
+
+
 
 
 
@@ -38,13 +52,16 @@ try{
 catch(error){
   dispatch({type:'SET_SINGLE_ERROR'});}}
  
-         
+const Addtocart=(obj)=>{
+ dispatch({type:'ADD_TO_CART',payload:obj});
+}
+
 
 useEffect(()=>{getproduct(API);},[]);                            //USE EFFECT HOOK (FETCH ALL PRODUCT)
 
 
     return (                                                      //TAKE APP COMPONENT AS CHILDREN
-    <AppContext.Provider value={{...state,getsingleproduct}}>               
+    <AppContext.Provider value={{...state,getsingleproduct,Addtocart,}}>               
     {children}
     </AppContext.Provider>);};                                          
 

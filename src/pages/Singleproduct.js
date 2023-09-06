@@ -15,14 +15,22 @@ const API='https://api.pujakaitem.com/api/products';
 
 const Singleproduct = () => {
 
-const {getsingleproduct,singleLoading,singleproduct}=Useproductcontext();
+const {getsingleproduct,singleLoading,singleproduct,Addtocart}=Useproductcontext();
 
 const {id}=useParams();
-const {id:alias,name,company,price,description,category,stock,star,reviews,image}=singleproduct;
+const {id:alias,name,company,price,description,stock,image}=singleproduct;
+
+const cartproductimage = Array.isArray(image) && image.length > 0 ? image[0].url : '';
 
 useEffect(()=>{getsingleproduct(`${API}?id=${id}`); },[]);
 
 if(singleLoading){return <Loader/>;}
+
+let Quantity=1;
+let postman2 = (value ) => { Quantity=value;};
+
+const sendtocart=()=>{Addtocart({alias,name,price,description,stock,cartproductimage,Quantity});}
+
 
 let Productname=company;
 let Productprice=price;
@@ -33,36 +41,37 @@ if(id==='-1'){
         Productprice=Demodata[0].price;
         Productabout=Demodata[0].about;}
 return(<>
-<Single_product_container>
-    <Single_product_left_div><Singleproductsimg apiimgdata={image}/></Single_product_left_div>
-    <Single_product_right_div>
+<Singleproductcontainer>
+    <Singleproductleftdiv><Singleproductsimg apiimgdata={image}/></Singleproductleftdiv>
+    <Singleproductrightdiv>
             <h1 className='Singleproduct_right_name'>{Productname}</h1>
-            <del><h1 ><Priceformat price={Productprice}/> </h1></del>
-            <h1 className='Singleproduct_right_price'><Priceformat price={Productprice-100100}/> </h1>
+            <del><h1 ><Priceformat price={Productprice*10}/> </h1></del>
+            <h1 className='Singleproduct_right_price'><Priceformat price={Productprice}/> </h1>
             <p className='Singleproduct_right_about'>{Productabout}</p>
             <div className="Singleproduct_right_Servicediv"><Service margin="-50px 0px 0px 0px" margin2="auto 10px auto 0px" /></div>
             <h1  >Available : <span>{stock>0?"In stock":"Out of stock"}</span></h1>
-            <Cartcounter/>
+            <Cartcounter countdata={postman2} />
             <div className="Singleproduct_right_div">
             <button>Buy Now</button>
-            <button>Add To Cart</button>
+            <button onClick={()=>sendtocart()}>Add To Cart</button>
             </div>
-    </Single_product_right_div>
-</Single_product_container>
+    </Singleproductrightdiv>
+</Singleproductcontainer>
 </>);}
 
-const Single_product_container = styled.div`
+const Singleproductcontainer = styled.div`
          display: flex;
          flex-direction: row;
          margin:30px 0px 0px 0px ;
          width: 100;
+         /* flex-wrap:wrap; */
          height:90vh;
          overflow:hidden;
          @media only screen and (max-width: 768px) {
          flex-direction:column;
          height:auto;
          margin:0px 0px 0px 0px ;}`;
-const Single_product_left_div = styled.div`
+const Singleproductleftdiv = styled.div`
         width: 45rem;
         height:42rem ;
         display:flex;
@@ -74,7 +83,7 @@ const Single_product_left_div = styled.div`
         height:auto;
         overflow:hidden;}`;
 
-const Single_product_right_div = styled.div`
+const Singleproductrightdiv = styled.div`
         display: flex;
         flex-direction: column;
         width: 50rem;

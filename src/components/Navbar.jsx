@@ -27,9 +27,6 @@ const {Filtersearch}=useFiltercontext();
 const navigate = useNavigate();
 
 
-
-
-
 const icon= <ShoppingCartIcon fontSize='large'/>
 const [real,update]=useState("");
 const [real2,update2]=useState("");
@@ -50,20 +47,31 @@ const shownavbar=()=>{
   document.getElementById("searchbar").style.display="none";
   document.getElementById("logo").style.display="none";}
 const hidenavbar=()=>{
-  if(window.screen.width<786){
+  if(window.innerWidth < 786){
   document.getElementById("hamburger").style.display="inline";
   document.getElementById("Clearnavbar").style.display="none";
   document.getElementById("searchbar").style.display="inline";
   document.getElementById("logo").style.display="inline";
-  document.getElementById("Nav").style.display="none";
-  }}
+  document.getElementById("Nav").style.display="none";}
+  }
+  function handleResize() {
+    if(window.innerWidth > 786){
+    document.getElementById("Nav").style.display="flex";
+    document.getElementById("hamburger").style.display="none";}
+   else{
+    document.getElementById("searchbar").style.display="inline";
+    document.getElementById("logo").style.display="inline";
+    document.getElementById("hamburger").style.display="inline";
+    document.getElementById("Nav").style.display="none";
+    }}
 
+  window.addEventListener('resize', handleResize);
 
 
 
 return (<>
 <Navbarcss>
-<NavLink id='logo' to='./Home'><img src={logo} width={'50rem'} height={'50rem'} href='logo'/></NavLink>
+<NavLink id='logo' to='./Home'><img src={logo} alt='logo' width={'50rem'} height={'50rem'} href='logo'/></NavLink>
 <Navbarsearch id='searchbar'>
 <Form onSubmit={submit}>
 <Navbarsearchinput className='navsearchinput'   type='text' placeholder="Search your product here" onChange={(obj)=>update(obj.target.value)}  value={real} ></Navbarsearchinput>
@@ -179,9 +187,12 @@ const Clearnav = styled.div`
    display:none;
    @media only screen and (max-width: 768px) {
    display:none;
-   color:black;
+   color:#cb1611;
    cursor:pointer;
-   margin:5px 0px 0px 0px; 
+   position:relative;
+   margin: 10px 0px 0px 0px ;
+   right: 0px;
+   float: right;
    }`;
 
 const Navbarmenu = styled.div`
@@ -195,8 +206,10 @@ const Navbarmenu = styled.div`
    display:none;
    flex-direction:column;
    width:100%;
-   height: 100vh;
-   z-index:2;
-   margin:0px 0px 0px -15px;
-   background-color:white;
-   position:sticky;}`;
+   position: fixed;
+   top: 0;
+   left: 0;
+   height: 100%;
+   z-index:2999;
+   margin:0px 0px 0px -10px;
+   background-color:white;}`;

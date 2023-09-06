@@ -9,7 +9,7 @@ const Product = (curr) => {
     <NavLink  to={`/Singleproduct/${id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
     <Productdiv >
     <figcaption className='caption'>{category}</figcaption>
-    <Productimg ><img src={image} alt={name}></img></Productimg>
+    <Productimg ><img  src={image} alt={name}></img></Productimg>
     <Productname ><p>{name}</p></Productname>
     <Productprice ><p>{<Priceformat price={price}/>}</p></Productprice>
     </Productdiv>

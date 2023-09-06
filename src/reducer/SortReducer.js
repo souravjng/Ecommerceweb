@@ -53,7 +53,10 @@ const SortReducer = (state, action) => {
     };}
     
   else {
-    const filterby=action.type.toLowerCase();
+    let filterby=action.type.toLowerCase();
+    if(filterby === 'phone'||filterby ==='smartphone'){
+      filterby="mobile";
+    }
     const sortdata = [...state.Allproducts].filter(curr => curr.name.toLowerCase().includes(filterby) || curr.category.toLowerCase().includes(filterby));
     return {...state,
     Sortproducts:sortdata,}}

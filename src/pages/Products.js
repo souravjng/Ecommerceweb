@@ -23,7 +23,7 @@ const filterprice=(obj)=>{
   setTimeout(() => {
     
   Filtersearch(obj,'pricefilter');;
-  },1000);}
+  },300);}
 
 return(<>
 <Div1>
@@ -88,7 +88,7 @@ const Div1left =styled.div`
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   margin:15px 0px 0px 0px;
-  font-size:26px;
+  font-size:20px;
   text-align:center;
 @media only screen and (max-width: 768px) {
     width:100px;
@@ -122,10 +122,11 @@ const Div1right =styled.div`
    flex-direction: row;
    flex-wrap:wrap;
    width: 95%;
-   justify-content:center;
+   /* justify-content:center; */
    height: auto;
    padding:0px 0px 0px 8px ;
-   margin: 30px 0px 30px 0px ;
+   margin: 30px 0px 30px 40px ;
+ @media only screen and (max-width: 768px) { flex:0;margin: 20px 0px 30px 0px ;}
  }`;
 
 const Div1righttop =styled.div`
@@ -134,7 +135,9 @@ const Div1righttop =styled.div`
  flex-direction: row;
  background-color:#fb8c00;
  padding: 0px 10px 0px 0px;
- margin:0px 0px 0px 0px ;`;
+ margin:0px 0px 0px 0px ;
+ @media only screen and (max-width: 768px) { flex:0;}
+`;
 
  
 export default Products;
