@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
-import { Useproductcontext } from '../context/Productcontext';
+import { useSelector } from 'react-redux';
 
 
 const Button = (props) =>{
 
-  const {Cartdata}= Useproductcontext();
-  let cart_item='';
-  
+const countcartitems=useSelector((state)=>state.cart.cartproducts);  
+let cart_item;
 let size;
-
-if(props.name==='cart'){ cart_item=Cartdata.length;size='17px';}
+if (props.name === 'cart') {
+    cart_item = countcartitems.length;
+    size = '17px';}
 const Carttotal=styled.span`
 position:absolute;
 color:black;
@@ -19,7 +19,7 @@ width:${size};
 height:${size};
 font-size:15px;
 background-color:white;
-border-radius:33px;else{}`;
+border-radius:33px;`;
 
 return (<>
 <Btn> <Carttotal >{cart_item}</Carttotal> {props.text}</Btn>

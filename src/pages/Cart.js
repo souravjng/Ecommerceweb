@@ -1,21 +1,23 @@
 import React from 'react'
 import styled from "styled-components";
 import Cartproducts from '../components/Cartproducts';
-import { Useproductcontext } from '../context/Productcontext';
 import Priceformat from '../smallfuction/Priceformat';
+import { useSelector } from 'react-redux';
 
 
 
 const Cart = () =>{
-  const {Cartdata,Totalprice}=Useproductcontext();
-  if(Cartdata.length===0){
+  const cartitems=useSelector((state)=>state.cart.cartproducts);
+  const Overalltotal=useSelector((state)=>state.cart.totalofcartproducts);
+
+  if(cartitems.length===0){
     return <Emptydiv><h1>No items in cart</h1></Emptydiv>
   }
 
     return(<>
 <Div1>
 <Divleft>
-{[...Cartdata].map((curr) => (
+{cartitems.map((curr) => (
   <Cartproducts
     id={curr.id}
     {...curr}
@@ -24,23 +26,23 @@ const Cart = () =>{
 </Divleft>
 
 
-<Divright Cartdata={Cartdata}  >
+<Divright cartitems={0}  >
 <Div1right>
 <Div1rightproductsdetails>
   <div className='detaildiv' >
   <p>Name</p><p>Price</p><p>Quantity</p><p>Total</p>
   </div>
   <div className='detaildiv1' >
-  <div className='detaildiv2' >{[...Cartdata].map((curr)=>(<div> <p>{curr.name}</p></div>))}</div>
-  <div className='detaildiv2' >{[...Cartdata].map((curr)=>(<div> <p> {<Priceformat price={curr.price}/>}</p></div>))}</div>
-  <div className='detaildiv2' >{[...Cartdata].map((curr)=>(<div> <p>{curr.Quantity}</p></div>))}</div>
-  <div className='detaildiv2' >{[...Cartdata].map((curr)=>(<div> <p> {<Priceformat price={curr.Quantity*curr.price}/>}</p></div>))}</div>
+  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p>{curr.name}</p></div>))}</div>
+  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p> {<Priceformat price={curr.price}/>}</p></div>))}</div>
+  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p>{curr.Quantity}</p></div>))}</div>
+  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p> {<Priceformat price={curr.Quantity*curr.price}/>}</p></div>))}</div>
   </div>
 </Div1rightproductsdetails>
-<Pricehead Cartdata={Cartdata}>
+<Pricehead cartitems={cartitems}>
 <Pricehead2>
 <h1 className='totalp1'>Totalprice :</h1>
-<h1 className='totalp2'> {<Priceformat price={Totalprice}/>}</h1></Pricehead2>
+<h1 className='totalp2'> {<Priceformat price={Overalltotal}/>}</h1></Pricehead2>
 <Rightbuttondiv>
 <button>Place order</button>
 </Rightbuttondiv>
@@ -105,7 +107,7 @@ height:500px;
 margin:0px 0px 300px 0px;
 padding: 0px 0px 0px 0px;
 @media only screen and (max-width: 768px) {
-display: ${(props) => (props.Cartdata.length === 0  ? 'none' : 'block')};
+display: ${(props) => (props.cartitems.length === 0  ? 'none' : 'block')};
 }`;
 
 const Div1right = styled.div`
@@ -118,21 +120,18 @@ const Div1rightproductsdetails= styled.div`
  height:auto;
  overflow:hidden;
  .detaildiv{
+  justify-content: space-around;
+  padding: 0px 5px 0px 5px ;
   display: flex;
   flex-direction:row;
-  justify-content:space-around;
-  p{font-size:21px; font-weight:bold;}
- }
- .detaildiv1{
+  p{padding: 0px 0px 0px 0px ;font-size:21px; font-weight:bold;}}
+ .detaildiv1{ text-align:center;
   display: flex;
   flex-direction:row;
-  justify-content:space-around;
-div{flex:1; margin:auto;p{font-size:14px;}}
- }
- .detaildiv2{
+div{margin:auto;flex:1;overflow:hidden;p{padding-left:4px;height:20px;font-size:14px;}}}
+ .detaildiv2{ 
   display: flex;
-  flex-direction:column;
- }
+  flex-direction:column;}
 
 @media only screen and (max-width: 768px) {display:none;}`;
 
@@ -165,7 +164,7 @@ button{
  const Pricehead=styled.div`
 display:flex;
 flex-direction:column;
-display:${(props)=>(props.Cartdata.length===0?'none':'block')};
+display:${(props)=>(props.cartitems.length===0?'none':'block')};
 @media only screen and (max-width: 768px) {
      width:100%;
      display: flex;

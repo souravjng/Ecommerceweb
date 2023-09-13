@@ -3,33 +3,25 @@ import styled from "styled-components";
 import Button from '../components/Button';
 import {NavLink} from "react-router-dom";
 import Demodata from './Links';
-
-
-
+import { useSelector,useDispatch } from 'react-redux';
+import { getsingleproduct} from "../store/singleSlice";
 
 const Headseaction = () => {
+  const dispatch=useDispatch();
+  useEffect(()=>{dispatch(getsingleproduct());},[]);
+  const data=useSelector((state)=>state.singleproduct.poster);
+  const {id,title:name,images,thumbnail}=data;
+  const about="The OPPO F19 is a smartphone designed and created to match your dynamic and stylish lifestyle. This smartphone features a 5000 mAh Battery for uninterrupted use, an AMOLED FHD+ Punch-hole Display for clear visuals, and an AI Beautification Selfie Camera to capture striking selfies with every click.";
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % Demodata.length);
-    }, 5000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  const currentImageObject = Demodata[currentImageIndex].url;
 
   return ( 
      <Div1>
      <Div1left>
-     <h1>{Demodata[0].name}</h1>
-     <p>{Demodata[0].about}</p>
-     <NavLink to='/Singleproduct/-1' ><Button text={"Click Me"}  btnbghovercolor={'green'}/></NavLink></Div1left>
-     <Div1right style={{backgroundImage: `url(${currentImageObject})`,}} className='homediv1right'></Div1right>
+     <h1>{name}</h1>
+     <p>{about}</p>
+     <NavLink to={`/Singleproduct/${id}`} ><Button text={"Click Me"}  btnbghovercolor={'green'}/></NavLink></Div1left>
+     <Div1right style={{backgroundImage: `url(${thumbnail})`,}} className='homediv1right'></Div1right>
      </Div1>)}
 
 const Div1 =styled.div`
@@ -43,9 +35,10 @@ const Div1 =styled.div`
   font-family: 'Montserrat', sans-serif;
 @media only screen and (max-width: 768px) {
   margin:0px 0px 0px -14px ;
+  padding: 0px 0px 0px 15px;
   height: 13rem;}`;
 const Div1left =styled.div`
-  margin: 0px 0px 0px 70px;
+  margin: 0px 0px 0px 60px;
   flex-grow: 1;
   width: 100%;
   padding: 0px 20px 0px 0px ;
@@ -60,7 +53,7 @@ const Div1left =styled.div`
          margin: 0px 0px 0px 0px ;
          height: 70px;}
   @media only screen and (max-width: 768px) {
-  margin: 0px 0px 0px 30px;
+  margin: 0px 0px 0px 0px;
   padding: 0px 20px 0px 0px ;
   h1{font-size: 1.4rem;}
   p{font-weight: bold;
@@ -72,7 +65,7 @@ const Div1left =styled.div`
   height: 3rem;}}`;
 const Div1right =styled.div`
   flex-grow: 1;
-  background: url(${Demodata[0].url});
+  background: url(${(props) => (props  ? 'inline' : 'none')});
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;

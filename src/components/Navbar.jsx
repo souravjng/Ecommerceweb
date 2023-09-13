@@ -7,9 +7,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import styled from "styled-components";
 import MenuIcon from '@mui/icons-material/Menu';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useFiltercontext } from '../context/Sortcontext';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { filterwithSearch } from '../store/productSlice';
 
 
 
@@ -22,22 +22,19 @@ let btnhovercolor='black';
 
 
 const Navbar = () =>{
-
-const {Filtersearch}=useFiltercontext();
+const dispatch=useDispatch();
 const navigate = useNavigate();
 
 
 const icon= <ShoppingCartIcon fontSize='large'/>
 const [real,update]=useState("");
-const [real2,update2]=useState("");
 const submit = (obj) =>{ 
+  navigate('./Products');
   obj.preventDefault();
-  update2(real);
-  update("");
-  navigate('./Products');}
+  dispatch(filterwithSearch(real));
+  update("");}
 
 
-useEffect(()=>{Filtersearch(real2,"name"); },[real2]);
   
 
 const shownavbar=()=>{
@@ -74,7 +71,7 @@ return (<>
 <NavLink id='logo' to='./Home'><img src={logo} alt='logo' width={'50rem'} height={'50rem'} href='logo'/></NavLink>
 <Navbarsearch id='searchbar'>
 <Form onSubmit={submit}>
-<Navbarsearchinput className='navsearchinput'   type='text' placeholder="Search your product here" onChange={(obj)=>update(obj.target.value)}  value={real} ></Navbarsearchinput>
+<Navbarsearchinput className='navsearchinput'   type='text' placeholder="Search your product here" onChange={(event)=>update(event.target.value)}  value={real} ></Navbarsearchinput>
 <Navbarsearchicon className='navsearchbtn'  type='submit'><SearchIcon fontSize='large'/></Navbarsearchicon>
 </Form>
 </Navbarsearch>

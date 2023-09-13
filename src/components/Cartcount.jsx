@@ -25,9 +25,10 @@ const Div1=styled.div`
     flex-direction:row;
     width:130px;
     font-family: 'Mulish', sans-serif;
-    border:1px solid black ;
+    border:1px solid grey ;
     border-radius:4px;
     margin:10px 0px 0px 20px ;
+    padding:0px 1px 0px 1px;
     height:40px;
     @media only screen and (max-width: 768px) {
     width:80px;

@@ -1,51 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from "styled-components";
-import {useFiltercontext} from '../context/Sortcontext';
 import Product from '../components/Product';
 import Filterproducts from '../components/Filterproducts';
-import Loader from '../components/Loader';
 import Priceformat from '../smallfuction/Priceformat';
 import { Button } from '@mui/material';
+import { useSelector,useDispatch } from 'react-redux';
+import {fetchProducts,filtercategory,filterrangeprice,} from '../store/productSlice';
+
+
  
 const Products = () => {
+
+const Allproducts=useSelector((state)=>state.product.Alldata);
+const {data:Realproducts,status} = useSelector((state)=>state.product);
+const categoryset = useSelector((state)=>state.product.uniquecategory);
+const maxrangeprice=Math.max(...Realproducts.map((curr)=>curr.price)); 
+
+const dispatch=useDispatch();
+useEffect(() => {dispatch(fetchProducts());}, []);
+
 const [activecategory,setactivecategory]=useState();
 const [rangeprice,setrangeprice]=useState(null);
-const {Loading,Allproducts,Sortproducts}=useFiltercontext();
-const {Filtersearch}=useFiltercontext();
-const uniquecategory=[...new Set(Allproducts.map((curr)=>curr.category))];
-const maximumprice=Math.max(...Allproducts.map((curr)=>curr.price));
-const actvcategory=(obj,obj2)=>{
+const actvcategory=(obj)=>{
   setactivecategory(obj);
-  setrangeprice(obj2);
-  Filtersearch(obj,obj2);}
+  setrangeprice(obj);
+  dispatch(filtercategory(obj));}
+
 const filterprice=(obj)=>{
   setrangeprice(obj);
-  setTimeout(() => {
-    
-  Filtersearch(obj,'pricefilter');;
-  },300);}
+  dispatch(filterrangeprice(obj));}
 
 return(<>
 <Div1>
-{Loading ? <Loader /> : null}
 <Div1left>
 <div>
    <h1 className='box'>Category</h1>
-   <p style={{color: activecategory === "All" ? 'red' : 'black'}} onClick={()=>actvcategory('All','All')} className='boxh1' >All</p>
-  {uniquecategory.map((curr,index)=>{return <h1 className='boxh1' key={index} onClick={()=>actvcategory(curr,"category")} style={{color: activecategory === curr ? 'red' : 'black'}} >{curr}</h1>;})}
+   <p style={{color: activecategory === "All" ? 'red' : 'black'}} onClick={()=>actvcategory('All')} className='boxh1' >All</p>
+  {categoryset.map((curr,index)=>{return <h1 className='boxh1' key={index} onClick={()=>actvcategory(curr)} style={{color: activecategory === curr ? 'red' : 'black'}} >{curr}</h1>;})}
   <div>
   <h1 className='box'>Price</h1>
   <p style={{fontSize:'18px'}} className='boxh1'>{<Priceformat price={rangeprice}/>}</p>
-  <input className='boxinput'  type='range' min={0} max={maximumprice} step={60} onChange={(event)=>filterprice(event.target.value)}  />
+  {<input className='boxinput'  type='range' min={0} max={maxrangeprice} step={11} onChange={(event)=>filterprice(event.target.value)}   />}
   </div>
   <Button onClick={()=>actvcategory("All","Max")}>Clear Filters</Button>
 </div>
 </Div1left>
 
 <Div1right>
-<Div1righttop><Filterproducts/></Div1righttop>
+<Div1righttop>
+<Filterproducts/>
+</Div1righttop>
 <div className='Productsdiv'>
-{Sortproducts.map((curr)=>{return <Product key={curr.id} {...curr}/>;})}
+{status === 'success' ? Allproducts.map((curr)=>{return <Product key={curr.id} {...curr}/>;}) : <h1 style={{ margin: 'auto' ,color:'grey'}}>{status}</h1>}
 </div>
 </Div1right>
 

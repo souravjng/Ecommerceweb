@@ -1,54 +1,44 @@
 import styled from "styled-components";
 import {useParams} from 'react-router-dom';
-import { Useproductcontext } from '../context/Productcontext';
 import  Loader from '../components/Loader';
 import { useEffect } from "react";
 import Priceformat from '../smallfuction/Priceformat';
 import Service from "../components/Service";
-import Demodata from "../components/Links";
 import Cartcounter from "../components/Cartcount";
 import Singleproductsimg from "../components/Singleproductsimg";
+import { useSelector,useDispatch } from 'react-redux';
+import { getsingleproduct} from "../store/singleSlice";
+import {Addtocart} from '../store/cartSlice';
 
 
-
-const API='https://api.pujakaitem.com/api/products';
 
 const Singleproduct = () => {
 
-const {getsingleproduct,singleLoading,singleproduct,Addtocart}=Useproductcontext();
-
 const {id}=useParams();
-const {id:alias,name,company,price,description,stock,image}=singleproduct;
+const dispatch=useDispatch();
+useEffect(()=>{dispatch(getsingleproduct(id));},[]);
+const singleproduct=useSelector((state)=>state.singleproduct.singledata);
+const {status}=useSelector((state)=>state.singleproduct);
 
-const cartproductimage = Array.isArray(image) && image.length > 0 ? image[0].url : '';
-
-useEffect(()=>{getsingleproduct(`${API}?id=${id}`); },[]);
-
-if(singleLoading){return <Loader/>;}
-
+const {id:productid,title:name,brand:company,price,description,stock,thumbnail,images,rating,discountPercentage}=singleproduct;
 let Quantity=1;
-let postman2 = (value ) => { Quantity=value;};
+let postman2 = (value) => {Quantity=value;};
+const sendtocart=()=>{dispatch(Addtocart({productid,name,price,description,stock,thumbnail,Quantity}));}
 
-const sendtocart=()=>{Addtocart({alias,name,price,description,stock,cartproductimage,Quantity});}
-
-
-let Productname=company;
-let Productprice=price;
-let Productabout=description;
-
-if(id==='-1'){
-        Productname=Demodata[0].name;
-        Productprice=Demodata[0].price;
-        Productabout=Demodata[0].about;}
 return(<>
-<Singleproductcontainer>
-    <Singleproductleftdiv><Singleproductsimg apiimgdata={image}/></Singleproductleftdiv>
+<Singleproductcontainer key={productid}>
+{status === 'Success' ? undefined :<Loader/> }
+    <Singleproductleftdiv>
+    <Singleproductsimg apiimgdata={{thumbnail,images}}/>
+    </Singleproductleftdiv>
     <Singleproductrightdiv>
-            <h1 className='Singleproduct_right_name'>{Productname}</h1>
-            <del><h1 ><Priceformat price={Productprice*10}/> </h1></del>
-            <h1 className='Singleproduct_right_price'><Priceformat price={Productprice}/> </h1>
-            <p className='Singleproduct_right_about'>{Productabout}</p>
+            <h1 className='Singleproduct_right_name'>{name}</h1>
+            <del><h1 ><Priceformat price={price*10}/> </h1></del>
+            <h1 className='Singleproduct_right_price'><Priceformat price={price}/> </h1>
+            <p className='Singleproduct_right_about'>{description}</p>
+            <h1  >Rating : {rating}%</h1>
             <div className="Singleproduct_right_Servicediv"><Service margin="-50px 0px 0px 0px" margin2="auto 10px auto 0px" /></div>
+            <h1  >Discount : {100-discountPercentage}%</h1>
             <h1  >Available : <span>{stock>0?"In stock":"Out of stock"}</span></h1>
             <Cartcounter countdata={postman2} />
             <div className="Singleproduct_right_div">

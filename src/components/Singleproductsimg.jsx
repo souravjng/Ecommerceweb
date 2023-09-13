@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import {useParams} from 'react-router-dom';
-import Demodata from "./Links";
 
 
-const Singleproductsimg = ({apiimgdata=[{url:""}]}) => {
-const [realimg,updataimg]=useState(0);  
-const {id}=useParams();
-if(id==='-1'){apiimgdata=Demodata;}  
+const Singleproductsimg = ({apiimgdata}) => {
+  const {thumbnail,images}=apiimgdata;
+const [realimg,updataimg]=useState(thumbnail);  
 return(<>
 <Single_product_left_imgs_div>
-{apiimgdata.map((curr,index)=>(<img onClick={()=>updataimg(index)} src={curr.url} key={index}  alt={curr.filename} width={130} height={130}></img>))}
+{images?images.map((curr,index)=>(<img onClick={()=>updataimg(curr)} src={curr} key={index}  alt={'singleproductimgs'} width={130} height={130}></img>)):null}
 </Single_product_left_imgs_div>
-<Single_product_left_img_div><img src={apiimgdata[realimg].url} alt={apiimgdata[realimg].filename} width={450} height={450}></img></Single_product_left_img_div>
+<Single_product_left_img_div><img src={realimg} alt={'thumbnail'} width={450} height={450}></img></Single_product_left_img_div>
 </>)}
 
 

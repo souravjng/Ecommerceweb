@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {AppProvider} from './context/Productcontext';
-import Filtercontextprovider from './context/Sortcontext';
+import store from './store/store';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<AppProvider><Filtercontextprovider><App/></Filtercontextprovider></AppProvider>,document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App/></Provider>,document.getElementById('root'));

@@ -4,12 +4,12 @@ import { NavLink } from 'react-router-dom';
 import Priceformat from '../smallfuction/Priceformat';
 
 const Product = (curr) => {
-    const {id,name,image,price,category}=curr;
+    const {id,title:name,thumbnail:image,price,category}=curr;
     return(<>
     <NavLink  to={`/Singleproduct/${id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
-    <Productdiv >
+    <Productdiv key={id} >
     <figcaption className='caption'>{category}</figcaption>
-    <Productimg ><img  src={image} alt={name}></img></Productimg>
+    <Productimg background={image} ></Productimg>
     <Productname ><p>{name}</p></Productname>
     <Productprice ><p>{<Priceformat price={price}/>}</p></Productprice>
     </Productdiv>
@@ -40,6 +40,8 @@ const Productdiv = styled.div`
   &:hover{box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;}`;
 const Productimg = styled.div`
   width: 13rem;
+  background: url(${props => props.background});
+  background-size:cover;
   overflow: hidden;
   border-radius: 7px 7px 0px 0px;
   height: 12rem;
@@ -49,7 +51,7 @@ const Productimg = styled.div`
 }`;
 const Productname = styled.div`
   padding: 0px 0px 10px 0px ;
-  margin: -8px 0px 0px 0px ;
+  margin: -3px 0px 0px 0px ;
   font-size: 16px;
   width: 13rem;
   font-weight:bold;
@@ -57,18 +59,18 @@ const Productname = styled.div`
   height: 2rem;
 @media only screen and (max-width: 768px) {
   width: 6rem;
-  font-size: 13px;
+  font-size: 8px;
   height: 1rem;
 }`;
 const Productprice = styled.div`
   padding: 0px 0px 10px 0px ;
-  margin: -25px 0px 0px 0px ;
+  margin: -18px 0px 0px 0px ;
   font-size: 17px;
   width: 13rem;
   height: 2rem;
 @media only screen and (max-width: 768px) {
   width: 6rem;
-  font-size: 13px;
+  font-size: 11px;
   height: 1rem;
 }`;
 

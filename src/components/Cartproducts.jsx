@@ -3,22 +3,26 @@ import styled from "styled-components";
 import Priceformat from '../smallfuction/Priceformat';
 import ClearIcon from '@mui/icons-material/Clear';
 import { NavLink } from 'react-router-dom';
-import { Useproductcontext } from '../context/Productcontext';
+import {Deletefromcart} from '../store/cartSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 const Cartproducts = (props) => {
-  const { id, description, name, price, cartproductimage ,Quantity,} = props;
-  const {Addtocart}=Useproductcontext();
-  const del =true;
+  
+  const {productid,name,price,description,thumbnail,Quantity}=props;
+  const dispatch=useDispatch();
+  const Deletefun=()=>{
+    dispatch(Deletefromcart(productid));
+  }
 
    return (<>
     
-    <Deletecart onClick={()=>Addtocart({id,del})}><ClearIcon fontSize='large'/></Deletecart>
+    <Deletecart onClick={()=>Deletefun()}><ClearIcon fontSize='large'/></Deletecart>
     
-<NavLink  to={`/Singleproduct/${id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
-    <Div1  key={id}>
-    <Divleft style={{ background: `url(${cartproductimage})`, backgroundSize: 'cover'  }}>
+<NavLink  to={`/Singleproduct/${productid}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+    <Div1  key={productid}>
+    <Divleft style={{ background: `url(${thumbnail})`, backgroundSize: 'cover'  }}>
     </Divleft>
     <Divright>
        <Divrighth1>{name}</Divrighth1>
@@ -41,7 +45,11 @@ const Deletecart = styled.div`
   margin: -35px 0px 0px 0px;
   top: 45px;
   cursor:pointer;
-  float:right;`;
+  float:right;
+@media only screen and (max-width: 768px) {
+  right: -10px;
+  top: 40px;
+}`;
   
 const Div1 = styled.div`
 border: 1px solid grey;
@@ -54,6 +62,7 @@ flex-direction:row;
 
 @media only screen and (max-width: 768px) {
   width:100%;
+  padding:0px 0px 0px 10px ;
   height:120px;
 }`;
 
@@ -64,6 +73,7 @@ padding: 0px 0px 0px 0px;
 background-color:black;
 @media only screen and (max-width: 768px) {
 width: 30%;
+margin:0px 0px 0px -10px;
 height: 120px;
 }`;
 
@@ -111,6 +121,7 @@ width:100%;
 height: 60px;
 display: flex;
 flex-direction:row;
+position:relative;
 margin: 0px 0px 0px 20px;
 @media only screen and (max-width: 768px) {
   margin: 2px 0px 0px 0px;
@@ -119,9 +130,10 @@ margin: 0px 0px 0px 20px;
 `;
 const Divrightprice = styled.p`
 font-size: 25px;
-
 color: red;
-margin: 20px 0px 0px 220px;
+position: absolute;
+right: 40px;
+
 @media only screen and (max-width: 768px) {
   font-size: 15px;
   position:absolute;

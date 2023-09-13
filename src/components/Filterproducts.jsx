@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {useFiltercontext} from "../context/Sortcontext";
+import { useSelector,useDispatch } from 'react-redux';
+import { filterbutton } from '../store/productSlice';
 
 
 const Filterproducts = () => {
-  const { Sortproducts } = useFiltercontext();
+  const Allproducts = useSelector((state)=>state.product.Alldata);
+  const dispatch=useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [change, setChange] = useState('Filter');
-  const {Sortfun}=useFiltercontext();
 
 
   const toggleDropdown = () => {
@@ -16,14 +17,14 @@ const Filterproducts = () => {
 
   const handleDropdownItemClick = (option) => {
     setChange(option);
-    Sortfun(option);
     setIsOpen(false);
+    dispatch(filterbutton(option));
   };
 
   return (
     <>
       <Headline>
-        <h1>{`${Sortproducts.length} Products Available`}</h1>
+        <h1>{Allproducts.length} Products Available</h1>
       </Headline>
       <Dropdown>
         <DropdownContainer>
