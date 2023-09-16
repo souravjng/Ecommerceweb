@@ -29,7 +29,7 @@ const Cartproducts = (props) => {
        <Divrightp>{description}</Divrightp>
        <Divrightbox>
        <Divquantity>Quantity: {Quantity}</Divquantity>
-       <Divrightprice>{<Priceformat price={Quantity*price}/>}</Divrightprice>
+       <Divrightprice>{<Priceformat price={Quantity*price*10000}/>}</Divrightprice>
        </Divrightbox>
     </Divright>
     </Div1>
@@ -94,6 +94,8 @@ font-size: 20px;
 margin: 20px 0px 0px 20px;
 @media only screen and (max-width: 768px) {
   font-size: 15px;
+  height: 20px;
+  overflow: hidden;
 margin: 10px 0px 0px 10px;
 }
 `;
@@ -137,7 +139,7 @@ right: 40px;
 @media only screen and (max-width: 768px) {
   font-size: 15px;
   position:absolute;
-  right: 20px;
+  right: 10px;
   margin: 27px 0px 0px 0px;
   
 }

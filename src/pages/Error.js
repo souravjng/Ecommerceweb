@@ -14,7 +14,9 @@ z-index: -1;
 text-align: center;
 margin:0px 0px 0px -8px;
 padding: 250px 14px 0px 0px ;
-font-size: 40px;`;
+font-size: 40px;
+h1{
+@media only screen and (max-width: 768px) {font-size:25px;}}`;
 
 return(<>
 <Errorcss>

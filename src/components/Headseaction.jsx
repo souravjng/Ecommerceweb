@@ -1,8 +1,7 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import styled from "styled-components";
 import Button from '../components/Button';
 import {NavLink} from "react-router-dom";
-import Demodata from './Links';
 import { useSelector,useDispatch } from 'react-redux';
 import { getsingleproduct} from "../store/singleSlice";
 
@@ -10,7 +9,7 @@ const Headseaction = () => {
   const dispatch=useDispatch();
   useEffect(()=>{dispatch(getsingleproduct());},[]);
   const data=useSelector((state)=>state.singleproduct.poster);
-  const {id,title:name,images,thumbnail}=data;
+  const {id,title:name,thumbnail}=data;
   const about="The OPPO F19 is a smartphone designed and created to match your dynamic and stylish lifestyle. This smartphone features a 5000 mAh Battery for uninterrupted use, an AMOLED FHD+ Punch-hole Display for clear visuals, and an AI Beautification Selfie Camera to capture striking selfies with every click.";
 
 
@@ -50,7 +49,7 @@ const Div1left =styled.div`
   p{font-weight: bold;
     font-size: 20px;}
   Button{font-size: 50px;
-         margin: 0px 0px 0px 0px ;
+         margin: 30px 0px 0px 0px ;
          height: 70px;}
   @media only screen and (max-width: 768px) {
   margin: 0px 0px 0px 0px;
@@ -62,7 +61,8 @@ const Div1left =styled.div`
   font-size: 1.2rem;
   width:6rem;
   margin: 0px 0px 0px 0px ;
-  height: 3rem;}}`;
+  height: 3rem;
+  @media only screen and (max-width: 768px) {height:2rem;padding: 5px 0px 0px 0px;margin:10px 0px 0px 0px ;border-radius:2px;}}}`;
 const Div1right =styled.div`
   flex-grow: 1;
   background: url(${(props) => (props  ? 'inline' : 'none')});

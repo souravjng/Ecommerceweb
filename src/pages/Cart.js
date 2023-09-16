@@ -34,15 +34,15 @@ const Cart = () =>{
   </div>
   <div className='detaildiv1' >
   <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p>{curr.name}</p></div>))}</div>
-  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p> {<Priceformat price={curr.price}/>}</p></div>))}</div>
+  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p> {<Priceformat price={curr.price*10000}/>}</p></div>))}</div>
   <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p>{curr.Quantity}</p></div>))}</div>
-  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p> {<Priceformat price={curr.Quantity*curr.price}/>}</p></div>))}</div>
+  <div className='detaildiv2' >{[...cartitems].map((curr)=>(<div> <p> {<Priceformat price={curr.Quantity*curr.price*10000}/>}</p></div>))}</div>
   </div>
 </Div1rightproductsdetails>
 <Pricehead cartitems={cartitems}>
 <Pricehead2>
 <h1 className='totalp1'>Totalprice :</h1>
-<h1 className='totalp2'> {<Priceformat price={Overalltotal}/>}</h1></Pricehead2>
+<h1 className='totalp2'> {<Priceformat price={Overalltotal*10000}/>}</h1></Pricehead2>
 <Rightbuttondiv>
 <button>Place order</button>
 </Rightbuttondiv>
@@ -182,16 +182,16 @@ const Pricehead2=styled.div`
 .totalp1{
  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  font-weight:light;
- font-size: 26px;
+ font-size: 23px;
  margin: 4px 10px 0px 0px;
 @media only screen and (max-width: 768px) {display:none;}}
 .totalp2{
- margin: 0px 0px 0px 0px;
+ margin: 6px 0px 0px 0px;
  color:red; 
+ font-size: 23px;
+ font-weight:light;
  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 @media only screen and (max-width: 768px) {margin:10px 0px 0px 0px;color:black; font-size:23px;}}`;
-
-
 
 
 

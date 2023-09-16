@@ -16,6 +16,8 @@ const cartSlice = createSlice({
         },
         Deletefromcart(state, action) {
             state.cartproducts=state.cartproducts.filter((item) => item.productid !== action.payload);
+            let count = state.cartproducts.reduce((accumulator, curr) => accumulator + curr.price * curr.Quantity, 0);
+            state.totalofcartproducts=count;
         },
     },
 });

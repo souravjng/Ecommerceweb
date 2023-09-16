@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { filterbutton } from '../store/productSlice';
 
 
-const Filterproducts = () => {
+const Filterproducts = (props) => {
   const Allproducts = useSelector((state)=>state.product.Alldata);
   const dispatch=useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,10 @@ const Filterproducts = () => {
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
+    props.showleftfilter(false);
+   setTimeout(() => {
+    setIsOpen(isOpen);
+   }, 4000);};
 
   const handleDropdownItemClick = (option) => {
     setChange(option);

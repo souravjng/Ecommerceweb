@@ -11,7 +11,7 @@ const Product = (curr) => {
     <figcaption className='caption'>{category}</figcaption>
     <Productimg background={image} ></Productimg>
     <Productname ><p>{name}</p></Productname>
-    <Productprice ><p>{<Priceformat price={price}/>}</p></Productprice>
+    <Productprice ><p>{<Priceformat price={price*10000}/>}</p></Productprice>
     </Productdiv>
     </NavLink>
     </>);}
@@ -34,10 +34,12 @@ const Productdiv = styled.div`
   font-size: 13px;
   padding:3px 3px 15px 3px ;
   justify-content:center;
-  margin:1rem 0.5rem 1rem 0.5rem ;
-  height: 8.5rem;
-}
-  &:hover{box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;}`;
+  margin:1rem 0.3rem 1rem 0.3rem ;
+  height: 8.5rem;}
+  &:hover{box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;}
+  figcaption{
+    @media only screen and (max-width: 768px) {font-size:10px;}
+  }`;
 const Productimg = styled.div`
   width: 13rem;
   background: url(${props => props.background});
@@ -50,26 +52,27 @@ const Productimg = styled.div`
   height: 6rem;
 }`;
 const Productname = styled.div`
-  padding: 0px 0px 10px 0px ;
-  margin: -3px 0px 0px 0px ;
+  padding: 0px 0px 0px 0px ;
+  margin: 0px 0px 0px 0px ;
   font-size: 16px;
   width: 13rem;
   font-weight:bold;
   font-family: 'Rajdhani', sans-serif;
-  height: 2rem;
+  height: 2.2rem;
 @media only screen and (max-width: 768px) {
   width: 6rem;
   font-size: 8px;
   height: 1rem;
 }`;
 const Productprice = styled.div`
-  padding: 0px 0px 10px 0px ;
-  margin: -18px 0px 0px 0px ;
+  padding: 0px 0px 0px 0px ;
+  margin: -17px 0px 0px 0px ;
   font-size: 17px;
   width: 13rem;
-  height: 2rem;
+  height: 2.3rem;
 @media only screen and (max-width: 768px) {
   width: 6rem;
+  margin: -7px 0px 0px 0px ;
   font-size: 11px;
   height: 1rem;
 }`;

@@ -20,7 +20,7 @@ useEffect(()=>{dispatch(getsingleproduct(id));},[]);
 const singleproduct=useSelector((state)=>state.singleproduct.singledata);
 const {status}=useSelector((state)=>state.singleproduct);
 
-const {id:productid,title:name,brand:company,price,description,stock,thumbnail,images,rating,discountPercentage}=singleproduct;
+const {id:productid,title:name,price,description,stock,thumbnail,images,rating,discountPercentage}=singleproduct;
 let Quantity=1;
 let postman2 = (value) => {Quantity=value;};
 const sendtocart=()=>{dispatch(Addtocart({productid,name,price,description,stock,thumbnail,Quantity}));}
@@ -33,8 +33,8 @@ return(<>
     </Singleproductleftdiv>
     <Singleproductrightdiv>
             <h1 className='Singleproduct_right_name'>{name}</h1>
-            <del><h1 ><Priceformat price={price*10}/> </h1></del>
-            <h1 className='Singleproduct_right_price'><Priceformat price={price}/> </h1>
+            <del><h1 ><Priceformat price={price*13000}/> </h1></del>
+            <h1 className='Singleproduct_right_price'><Priceformat price={price*10000}/> </h1>
             <p className='Singleproduct_right_about'>{description}</p>
             <h1  >Rating : {rating}%</h1>
             <div className="Singleproduct_right_Servicediv"><Service margin="-50px 0px 0px 0px" margin2="auto 10px auto 0px" /></div>

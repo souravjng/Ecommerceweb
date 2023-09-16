@@ -1,6 +1,6 @@
-const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
+const { createSlice} = require('@reduxjs/toolkit');
 
-export const STATUSES = Object.freeze({
+const STATUSES = Object.freeze({
     SUCCESS: 'success',
     ERROR: 'error',
     LOADING: 'Loading...',
@@ -54,30 +54,10 @@ const productSlice = createSlice({
             let checkmename=state.data.filter((curr)=>curr.title.toLowerCase().includes(searchtext));
             if(checkmename){state.Alldata=checkmename;}}}
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(fetchProducts.pending, (state, action) => {
-    //             state.status = STATUSES.LOADING;
-    //         })
-    //         .addCase(fetchProducts.fulfilled, (state, action) => {
-    //             state.data = action.payload;
-    //             state.status = STATUSES.IDLE;
-    //         })
-    //         .addCase(fetchProducts.rejected, (state, action) => {
-    //             state.status = STATUSES.ERROR;
-    //         });
-    // },
 });
 
 export const { setProducts, setStatus,filtercategory,filterbutton,filterrangeprice,filterwithSearch} = productSlice.actions;
 export default productSlice.reducer;
-
-// Thunks
-// export const fetchProducts = createAsyncThunk('products/fetch', async () => {
-//     const res = await fetch('https://api.pujakaitem.com/api/products');
-//     const data = await res.json();
-//     return data;
-// });
 
 export function fetchProducts() {
     return async function fetchProductThunk(dispatch, getState) {

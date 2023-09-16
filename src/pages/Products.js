@@ -18,6 +18,7 @@ const maxrangeprice=Math.max(...Realproducts.map((curr)=>curr.price));
 
 const dispatch=useDispatch();
 useEffect(() => {dispatch(fetchProducts());}, []);
+const [activefilter,updateactivefilter]=useState(true);
 
 const [activecategory,setactivecategory]=useState();
 const [rangeprice,setrangeprice]=useState(null);
@@ -30,16 +31,20 @@ const filterprice=(obj)=>{
   setrangeprice(obj);
   dispatch(filterrangeprice(obj));}
 
+
+  
+
+
 return(<>
 <Div1>
-<Div1left>
+<Div1left props={activefilter}>
 <div>
    <h1 className='box'>Category</h1>
    <p style={{color: activecategory === "All" ? 'red' : 'black'}} onClick={()=>actvcategory('All')} className='boxh1' >All</p>
   {categoryset.map((curr,index)=>{return <h1 className='boxh1' key={index} onClick={()=>actvcategory(curr)} style={{color: activecategory === curr ? 'red' : 'black'}} >{curr}</h1>;})}
   <div>
   <h1 className='box'>Price</h1>
-  <p style={{fontSize:'18px'}} className='boxh1'>{<Priceformat price={rangeprice}/>}</p>
+  <p style={{fontSize:'15px'}} className='boxh1'>{<Priceformat price={rangeprice*10000}/>}</p>
   {<input className='boxinput'  type='range' min={0} max={maxrangeprice} step={11} onChange={(event)=>filterprice(event.target.value)}   />}
   </div>
   <Button onClick={()=>actvcategory("All","Max")}>Clear Filters</Button>
@@ -48,7 +53,7 @@ return(<>
 
 <Div1right>
 <Div1righttop>
-<Filterproducts/>
+<Filterproducts showleftfilter={(obj)=>updateactivefilter(obj)}/>
 </Div1righttop>
 <div className='Productsdiv'>
 {status === 'success' ? Allproducts.map((curr)=>{return <Product key={curr.id} {...curr}/>;}) : <h1 style={{ margin: 'auto' ,color:'grey'}}>{status}</h1>}
@@ -65,7 +70,10 @@ const Div1 =styled.div`
  flex-direction:row;
  height:auto;
  padding:0px 0px 0px 15px ;
- margin:0px 0px 0px -8px ;`;
+ margin:0px 0px 0px -23px ;
+ @media only screen and (max-width: 768px) {
+  margin-bottom:500px;
+ }`;
 
 const Div1left =styled.div`
  background-color:#b3e5fc;
@@ -78,6 +86,9 @@ const Div1left =styled.div`
  width:100%;
  height: auto;
  padding:0px 0px 300px 0px ;
+ @media only screen and (max-width: 768px) {
+  display: ${(props) => (props.props === true ? 'none' : 'static')};
+}
  .box{
   margin:30px 0px 0px 0px;
   font-size:26px;
@@ -128,11 +139,13 @@ const Div1right =styled.div`
    flex-direction: row;
    flex-wrap:wrap;
    width: 95%;
-   /* justify-content:center; */
    height: auto;
    padding:0px 0px 0px 8px ;
    margin: 30px 0px 30px 40px ;
- @media only screen and (max-width: 768px) { flex:0;margin: 20px 0px 30px 0px ;}
+ @media only screen and (max-width: 768px) { 
+  flex:0;
+  margin: 20px 0px 150px 10px ;
+}
  }`;
 
 const Div1righttop =styled.div`
@@ -140,9 +153,11 @@ const Div1righttop =styled.div`
  display: flex;
  flex-direction: row;
  background-color:#fb8c00;
- padding: 0px 10px 0px 0px;
+ padding: 0px 15px 0px 0px;
+ width: 100%;
  margin:0px 0px 0px 0px ;
- @media only screen and (max-width: 768px) { flex:0;}
+ @media only screen and (max-width: 768px) { flex:0;
+ margin:0px -14px 0px 0px ;}
 `;
 
  

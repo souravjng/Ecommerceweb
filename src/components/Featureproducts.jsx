@@ -3,11 +3,10 @@ import styled from "styled-components";
 import Banner from '../components/Banner';
 import Product from './Product';
 
-const Featureproducts = (dataa) => {
-const {data}=dataa;
+const Featureproducts = ({ data, text }) => {
 return(<>
    
-  <Banner text={" Best Products"}/>
+  <Banner text={`Best ${text}`}/>
   <Allproductsdiv>{data.map((curr)=>{ return <Product key={curr.id} {...curr}/>;})}</Allproductsdiv>
 </>);}
 

@@ -5,11 +5,11 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const About = () => {
-  return (
+  return (<div styled={{margin:'0px 0px 0px 0px '}}>
     <AboutContainer>
-      <Title>Welcome to Our Story</Title>
+      <Title>Welcome to AuraCart</Title>
       <Description>
-        At our e-commerce store, we're dedicated to providing you with the best shopping experience.
+        At our AuraCart e-commerce store, we're dedicated to providing you with the best shopping experience.
         Our journey began with a passion for quality products and exceptional customer service.
       </Description>
       <ImageContainer>
@@ -30,20 +30,36 @@ const About = () => {
           <Text>24/7 Customer Support</Text>
         </FeatureItem>
       </FeatureList>
-    </AboutContainer>
+    </AboutContainer></div>
   );
 };
+
+
+
+
+const moveGradient = keyframes`
+  0% {background-position: 0% 20%;}
+  30% {background-position: 20% 60%;}
+  50% {background-position: 60% 90%;}
+  80% {background-position: 100% 50%;}
+  90% {background-position: 50% 10%;}
+  100% {background-position: 10% 0%;}
+`;
 
 const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 4rem;
+  background: linear-gradient(to left, #0052D4, #65C7F7, #0000);
+  background-size: 400% 400%; 
+  animation: ${moveGradient} 7s linear infinite;
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  text-align:center;
 `;
 
 const Description = styled.p`
@@ -81,12 +97,6 @@ const FeatureItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Icon = styled.img`
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
 `;
 
 const Text = styled.p`

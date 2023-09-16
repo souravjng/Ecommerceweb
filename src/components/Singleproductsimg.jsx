@@ -6,14 +6,14 @@ const Singleproductsimg = ({apiimgdata}) => {
   const {thumbnail,images}=apiimgdata;
 const [realimg,updataimg]=useState(thumbnail);  
 return(<>
-<Single_product_left_imgs_div>
+<SingleProductLeftImgsDiv>
 {images?images.map((curr,index)=>(<img onClick={()=>updataimg(curr)} src={curr} key={index}  alt={'singleproductimgs'} width={130} height={130}></img>)):null}
-</Single_product_left_imgs_div>
+</SingleProductLeftImgsDiv>
 <Single_product_left_img_div><img src={realimg} alt={'thumbnail'} width={450} height={450}></img></Single_product_left_img_div>
 </>)}
 
 
-const Single_product_left_imgs_div=styled.div`
+const SingleProductLeftImgsDiv=styled.div`
     display:flex;
     flex-direction:column;
     width: 15rem;
