@@ -7,12 +7,11 @@ const Banner = (props) => {
 const Bannerdiv =styled.div`
  width:100%;
  height:150px;
- margin:0px 0px 20px -20px;
+ margin:20px 0px 20px -20px;
  padding:0px 0px 0px 20px;
- border:1px solid white;
- background-color:white;
+ background-color:#fb8c00;
  text-align:center;
-  h1{ color:black;
+  h1{ color:white;
     font-size:80px;
     margin:40px 0px 0px 0px;
     font-family: 'Rajdhani', sans-serif;}

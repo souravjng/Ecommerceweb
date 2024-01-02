@@ -4,11 +4,10 @@ import { NavLink } from 'react-router-dom';
 import Priceformat from '../smallfuction/Priceformat';
 
 const Product = (curr) => {
-    const {id,title:name,thumbnail:image,price,category}=curr;
+    const {id,title:name,thumbnail:image,price}=curr;
     return(<>
     <NavLink  to={`/Singleproduct/${id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
     <Productdiv key={id} >
-    <figcaption className='caption'>{category}</figcaption>
     <Productimg background={image} ></Productimg>
     <Productname ><p>{name}</p></Productname>
     <Productprice ><p>{<Priceformat price={price*10000}/>}</p></Productprice>

@@ -20,7 +20,7 @@ const Sectiondiv1 =styled.div`
  margin:50px 0px 20px -20px;
  padding:0px 0px 0px 20px;
  height:300px;
- background-color:#d4c1ec;
+ background-color:#b3e5fc;
  display:flex;
  flex-direction:column;
  border-bottom: 2px solid white;
